@@ -1,6 +1,6 @@
 # CakeSoftDelete plugin for CakePHP
 
-[![拷贝自PGBI/cakephp3-soft-delete](https://github.com/PGBI/cakephp3-soft-delete)]
+[拷贝自PGBI/cakephp3-soft-delete](https://github.com/PGBI/cakephp3-soft-delete)
 因项目需要修改软删除日期字段为状态字段
 
 ## Purpose
