@@ -84,7 +84,7 @@ trait SoftDeleteTrait {
         $query = $this->query();
         $conditions = (array)$entity->extract($primaryKey);
         $statement = $query->update()
-            ->set([$this->getSoftDeleteField() => date('Y-m-d H:i:s')])
+            ->set([$this->getSoftDeleteField() => '1'])
             ->where($conditions)
             ->execute();
 
@@ -109,7 +109,7 @@ trait SoftDeleteTrait {
     {
         $query = $this->query()
             ->update()
-            ->set([$this->getSoftDeleteField() => date('Y-m-d H:i:s')])
+            ->set([$this->getSoftDeleteField() => '1'])
             ->where($conditions);
         $statement = $query->execute();
         $statement->closeCursor();
@@ -150,8 +150,7 @@ trait SoftDeleteTrait {
         $query = $this->query()
             ->delete()
             ->where([
-                $this->getSoftDeleteField() . ' IS NOT NULL',
-                $this->getSoftDeleteField() . ' <=' => $until->format('Y-m-d H:i:s')
+                $this->getSoftDeleteField() => '1'
             ]);
         $statement = $query->execute();
         $statement->closeCursor();
@@ -166,7 +165,7 @@ trait SoftDeleteTrait {
     public function restore(EntityInterface $entity)
     {
         $softDeleteField = $this->getSoftDeleteField();
-        $entity->$softDeleteField = null;
+        $entity->$softDeleteField = '0';
         return $this->save($entity);
     }
 }
